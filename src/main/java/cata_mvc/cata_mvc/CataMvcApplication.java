@@ -9,5 +9,4 @@ public class CataMvcApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CataMvcApplication.class, args);
 	}
-
 }

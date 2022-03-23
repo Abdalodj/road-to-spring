@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produit</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css"
+    integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container pt-5">
+    <h1 class="text-center">Spring Search App</h1>
+    <div class="row justify-content-center my-5">
+      <div class="col-8">
+        <form th:action="@{index}" method="get" class="form-inline">
+          <div class="form-group mx-3">
+            <label for="search">Mot Clé:</label>
+            <input type="search" name="mc" class="form-control ml-3" id="search" th:value="${mc}" />
+          </div>
+          <button type="submit" class="btn btn-primary">Chercher</button>
+        </form>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-9">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Désignation</th>
+              <th>Prix</th>
+              <th>Quantité</th>
+              <th>Supprimer</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="p:${listProd}">
+              <td th:text="${p.id}"></td>
+              <td th:text="${p.designation}"></td>
+              <td th:text="${p.prix}"></td>
+              <td th:text="${p.quantite}"></td>
+              <td><a th:href="@{/delete(id=${p.id}, page=${active-1}, size=5, mc=${mc})}"><i class="fa-solid fa-trash-can text-danger"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row justify-content-start mx-5">
+      <div class="col-5">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <li th:each="i : ${#numbers.sequence(1, pages)}"
+              th:class="${i eq active}? 'page-item active' : 'page-item'">
+              <a class="page-link" th:href="@{/index(page=${i-1}, size=5, mc=${mc})}" th:text="${i}">1</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
