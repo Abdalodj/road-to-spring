@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Produit</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css"
+    integrity="sha512-T584yQ/tdRR5QwOpfvDfVQUidzfgc2339Lc8uBDtcp/wYu80d7jwBgAxbyMh0a9YM9F8N3tdErpFI8iaGx6x5g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card-header bg-secondary bg-gradient bg-opacity-25 text-center h3">
+        CONFIRMATION
+      </div>
+      <div class="card-body">
+        <div class="row justify-content-center">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="id" class="form-label h5">ID :</label>
+              <input type="text" name="id" id="id" class="form-control" th:value="${produit.id}" disabled />
+            </div>
+            <div class="form-group mb-3">
+              <label for="designation" class="form-label h5">Désignation :</label>
+              <input type="text" name="designation" id="designation" class="form-control"
+                th:value="${produit.designation}" disabled />
+            </div>
+            <div class="form-group mb-3">
+              <label for="prix" class="form-label h5">Prix :</label>
+              <input type="number" name="prix" id="prix" class="form-control" th:value="${produit.prix}" disabled />
+            </div>
+            <div class="form-group mb-3">
+              <label for="quantite" class="form-label h5">Quantité :</label>
+              <input type="number" name="quantite" id="quantite" class="form-control" th:value="${produit.quantite}"
+                disabled />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

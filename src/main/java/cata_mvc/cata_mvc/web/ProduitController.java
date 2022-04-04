@@ -1,10 +1,13 @@
 package cata_mvc.cata_mvc.web;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,25 +26,43 @@ public class ProduitController {
       @RequestParam(name = "page", defaultValue = "0") int p,
       @RequestParam(name = "size", defaultValue = "5") int s,
       @RequestParam(name = "mc", defaultValue = "") String mc) {
-    Page<Produit> pageProd = pRepo.chercher("%"+mc+"%", PageRequest.of(p, s));
+    Page<Produit> pageProd = pRepo.chercher("%" + mc + "%", PageRequest.of(p, s));
 
     model.addAttribute("listProd", pageProd.getContent());
     model.addAttribute("pages", pageProd.getTotalPages());
-    model.addAttribute("active", ++p); 
+    model.addAttribute("active", ++p);
     model.addAttribute("size", s);
     model.addAttribute("mc", mc);
 
     return "produit";
   }
 
-  @RequestMapping(value = "/delete", method=RequestMethod.GET)
+  @RequestMapping(value = "/delete", method = RequestMethod.GET)
   public String delete(
-    Model model, 
-    @RequestParam(name = "id") Long id,
-    @RequestParam(name = "page", defaultValue = "0") int p,
-    @RequestParam(name = "size", defaultValue = "5") int s,
-    @RequestParam(name = "mc", defaultValue = "") String mc) {
+      Model model,
+      @RequestParam(name = "id") Long id,
+      @RequestParam(name = "page", defaultValue = "0") int p,
+      @RequestParam(name = "size", defaultValue = "5") int s,
+      @RequestParam(name = "mc", defaultValue = "") String mc) {
     pRepo.deleteById(id);
-    return "redirect:/index?page="+p+"&size="+s+"&mc="+mc;
+    return "redirect:/index?page=" + p + "&size=" + s + "&mc=" + mc;
+  }
+
+  @RequestMapping(value = "/form", method = RequestMethod.GET)
+  public String formProduit(Model model) {
+    model.addAttribute("produit", new Produit());
+    return "FormProduit";
+  }
+
+  @RequestMapping(value = "/save", method = RequestMethod.POST)
+  public String save(
+      Model model,
+      @Valid Produit produit,
+      BindingResult bResult) {
+        if (bResult.hasErrors()) {
+          return "FormProduit";
+        }
+    pRepo.save(produit);
+    return "Confirmation";
   }
 }

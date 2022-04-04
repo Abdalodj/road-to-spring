@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}">
 
 <head>
   <meta charset="UTF-8" />
@@ -15,7 +16,7 @@
 </head>
 
 <body>
-  <div class="container pt-5">
+  <div class="container pt-5" layout:fragment="content">
     <h1 class="text-center">Spring Search App</h1>
     <div class="row justify-content-center my-5">
       <div class="col-8">
@@ -46,13 +47,15 @@
               <td th:text="${p.designation}"></td>
               <td th:text="${p.prix}"></td>
               <td th:text="${p.quantite}"></td>
-              <td><a th:href="@{/delete(id=${p.id}, page=${active-1}, size=5, mc=${mc})}"><i class="fa-solid fa-trash-can text-danger"></i></a></td>
+              <td><a onclick="return confirm('Êtes-vous sûre ?')"
+                  th:href="@{/delete(id=${p.id}, page=${active-1 }, size=5, mc=${mc})}"><i
+                    class="fa-solid fa-trash-can text-danger"></i></a></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-    <div class="row justify-content-start mx-5">
+    <div class="row justify-content-center justify-content-lg-start mx-lg-5">
       <div class="col-5">
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
