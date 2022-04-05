@@ -16,7 +16,7 @@ public class Produit implements Serializable {
   @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   
-  @Size(min=4, max=15)
+  @Size(min=4, max=25)
   @NotBlank
   private String designation;
 
