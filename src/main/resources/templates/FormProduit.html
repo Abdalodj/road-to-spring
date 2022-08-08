@@ -4,10 +4,11 @@
 
 <head>
   <title>Ajouter</title>
+  <link rel="stylesheet" href="../static/css/style.css" th:href="@{css/style.css}">
 </head>
 
 <body>
-  <div class="container" layout:fragment="content">
+  <div class="container spacer" layout:fragment="content">
     <div class="card my-3">
       <div th:if="${edit == null}" class="card-header bg-secondary bg-gradient bg-opacity-25 text-center h3">
         Saisie d'un produit
@@ -37,7 +38,7 @@
               <div class="form-group mb-3">
                 <label for="quantite" class="form-label h5">Quantité :</label>
                 <input type="number" name="quantite" id="quantite" th:class="${#fields.hasErrors('produit.quantite')} ? 'form-control is-invalid' : (${produit.quantite != null AND produit.quantite != 0} ? 'form-control is-valid' : 'form-control')" th:value="${produit.quantite}"/>
-                <div class="invalid-feedback text-capitalize" th:errors="${produit.quantite}"></div>
+                <div class="invalid-feedback text-capitalize red" th:errors="${produit.quantite}"></div>
               </div>
                 <button th:if="${edit == null}" type="submit" class="btn btn-primary">Enregistrer</button>
                 <button th:if="${edit != null}" type="submit" class="btn btn-primary">Modifier</button>

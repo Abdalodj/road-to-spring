@@ -47,7 +47,7 @@ public class ProduitController {
       @RequestParam(name = "size", defaultValue = "5") int s,
       @RequestParam(name = "mc", defaultValue = "") String mc) {
     pRepo.deleteById(id);
-    return "redirect:/index?page=" + p + "&size=" + s + "&mc=" + mc;
+    return "redirect:/index?page=" + 0 + "&size=" + s + "&mc=" + mc;
   }
 
   @GetMapping({ "/form", "/form/{id}" })
